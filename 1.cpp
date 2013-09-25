@@ -1,7 +1,14 @@
+// =======================================================================================
+// Computer Science 333
+// Assignment No 1
+// Date: 9/25/13
+// Programmer: Harry Mora
+// Description: This assignment uses a mechanism for enforcing RBAC policies.
+// =======================================================================================
+
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <map>
 using namespace std;
 
 struct USER{
@@ -28,8 +35,9 @@ class RBAC{
 		bool a;
 		
 	public:
-			RBAC(){}
-			void loadFiles(){
+		RBAC(){}
+		// loads data from external files
+		void loadFiles(){
 				
 				f.open("URA.txt", ios::in);
 				if(!f){ cout << "URA.txt file not found"; exit(1); }
@@ -49,6 +57,7 @@ class RBAC{
 				}
 
 		}
+		// login user
 		bool userLogin(){	
 			
 			cout << "Login: ";
@@ -67,9 +76,8 @@ class RBAC{
 				a = true;
 			}
 			else{
-				cout << "error- username not found";
+				cout << "ERROR: user " << username << " is not in the database!\n";
 				a = false;
-				cout << a;
 			}
 			
 			for(int i = 0; i < 3; ++i)
@@ -83,6 +91,7 @@ class RBAC{
 			return a;
 			
 		}
+		// gets user action to perform
 		void getUserAction(){
 			cout << "cmd> ";
 			getline(cin, command);
@@ -99,6 +108,7 @@ class RBAC{
 				}
 			}
 		}
+		// verify user permissions
 		void verifyUserPermissions()
 		{
 			
@@ -123,7 +133,7 @@ class RBAC{
 				else if((user_id == 3 )&&(user_action == "abduct"))
 				{
 					cout << "Access granted by virtue of roles: ";
-					cout << y[1].role << endl;
+					cout << y[2].role << endl;
 				}
 				else if((user_id == 3 )&&(user_action != "abduct")){
 					cout << "Access denied: you are not authorized to perform this action!";
@@ -132,6 +142,7 @@ class RBAC{
 
 				
 		}
+		// additional test functions
 		void printUserRoles(){
 			cout << "Roles: " <<"\n";
 			for(int i =0; i < 3; ++i){
@@ -165,6 +176,7 @@ int main(){
 
 	A.loadFiles();
 	access = A.userLogin();
+	// if user is in the system proceed, else quit the program
 	if(access == true){
 		A.getUserAction();
 		A.verifyUserPermissions();
@@ -172,3 +184,25 @@ int main(){
 
 	return(0);
 }
+
+/*Sample IO
+
+Login: Alberto
+Welcome Alberto!
+cmd> levitate airplane
+Access granted by virtue of roles: Jedi
+
+Login: Kevin
+Welcome Kevin!
+cmd> climb wall
+Access granted by virtue of roles: Ninja
+
+Login: Cesar
+Welcome Cesar!
+cmd> abduct human
+Access granted by virtue of roles: Alien
+
+Login: Josue
+ERROR: user Josue is not in the database!
+
+*/
