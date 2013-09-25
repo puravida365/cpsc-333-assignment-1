@@ -39,22 +39,22 @@ class RBAC{
 		// loads data from external files
 		void loadFiles(){
 				
-				f.open("URA.txt", ios::in);
-				if(!f){ cout << "URA.txt file not found"; exit(1); }
+			f.open("URA.txt", ios::in);
+			if(!f){ cout << "URA.txt file not found"; exit(1); }
 				
-				for(int i = 0; i < 3; ++i){
-					f >> x[i].name;
-					f >> x[i].role;
-				}
+			for(int i = 0; i < 3; ++i){
+				f >> x[i].name;
+				f >> x[i].role;
+			}
 				
-				g.open("PRA.txt", ios::in);
-				if(!g){ cout << "PRA.txt - file not found "; exit(1); }
+			g.open("PRA.txt", ios::in);
+			if(!g){ cout << "PRA.txt - file not found "; exit(1); }
 				
-				for(int i = 0; i < 3; ++i){
-						g >> y[i].role;
-						g >> y[i].action;
-						g >> y[i].object;
-				}
+			for(int i = 0; i < 3; ++i){
+				g >> y[i].role;
+				g >> y[i].action;
+				g >> y[i].object;
+			}
 
 		}
 		// login user
