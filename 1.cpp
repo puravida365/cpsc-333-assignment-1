@@ -48,6 +48,15 @@ class RBAC{
 		void userLogin(){
 			cout << "Login: ";
 			cin >> username;
+			for(int i = 0; i < 3; ++i){
+				if( (x[i].name) == username ){
+					cout << "Welcome " << username << "!\n"; 
+				}
+				else{
+					cout << "Error user " << username << " is not in the database\n";
+					break;
+				}
+			}
 		}
 		void printUserRoles(){
 			for(int i =0; i < 3; ++i){
@@ -64,6 +73,7 @@ class RBAC{
 int main(void){
 	RBAC A;
 	A.loadFiles();
+	A.userLogin();
 	//A.printUserRoles();
 	//A.printActions();
 	//A.printRoles();
